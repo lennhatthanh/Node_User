@@ -3,9 +3,23 @@
 
 # {
 #   "name": "John Doe",
-#   "email": "user@example.com",
+#   "email": "user3@example.com",
 #   "password": "123456"
 # }
 
 GET http://localhost:3001/api/users
 Content-Type: application/json
+
+# PUT http://localhost:3001/api/users
+# Content-Type: application/json
+
+# {
+#   "_id": "69199fcc901de16ddac7c18a",
+#   "name": "Updated Name",
+#   "email": "user11@example.com",
+#   "password": "65432111"
+# }
+
+# DELETE http://localhost:3001/api/users/69199fcc901de16ddac7c18a
+# Content-Type: application/json
+
