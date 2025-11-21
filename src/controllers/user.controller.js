@@ -21,7 +21,7 @@ export const deleteUser = async (req, res) => {
         const { id } = req.params;
         const userExists = await User.findOne({ _id: id });
         if (!userExists) {
-            return error(res, "User does not exist", 400, "USER_NOT_FOUND");
+            return error(res, "User does not exist", 404, "USER_NOT_FOUND");
         }
         await userExists.deleteOne();
         success(res, "User deleted successfully");
@@ -35,7 +35,7 @@ export const updateUser = async (req, res) => {
         const { _id, email, name, password } = req.body;
         const userExists = await User.findOne({ _id });
         if (!userExists) {
-            return error(res, "User does not exist", 400, "USER_NOT_FOUND");
+            return error(res, "User does not exist", 404, "USER_NOT_FOUND");
         }
         const userUpdate = await User.updateOne({ _id }, { email, name, password });
         success(res, "User updated successfully", userUpdate);
