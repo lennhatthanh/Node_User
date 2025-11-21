@@ -9,65 +9,6 @@ const router = express.Router();
  *   description: User CRUD APIs
  */
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     User:
- *       type: object
- *       properties:
- *         _id:
- *           type: string
- *         name:
- *           type: string
- *           example: John Doe
- *         email:
- *           type: string
- *           example: johndoe@gmail.com
- *         password:
- *           type: string
- *           example: 123456
- *
- *     CreateUserInput:
- *       type: object
- *       required:
- *         - name
- *         - email
- *         - password
- *       properties:
- *         name:
- *           type: string
- *           example: John Doe
- *         email:
- *           type: string
- *           example: johndoe@gmail.com
- *         password:
- *           type: string
- *           example: 123456
- *
- *     UpdateUserInput:
- *       type: object
- *       properties:
- *         name:
- *           type: string
- *           example: John Updated
- *         email:
- *           type: string
- *           example: updated@gmail.com
- *         password:
- *           type: string
- *           example: abc123
- *
- *     ErrorResponse:
- *       type: object
- *       properties:
- *         message:
- *           type: string
- *         code:
- *           type: string
- *         status:
- *           type: integer
- */
 
 /**
  * @swagger
