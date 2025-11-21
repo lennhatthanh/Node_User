@@ -18,7 +18,6 @@ const router = express.Router();
  *       properties:
  *         _id:
  *           type: string
- *           example: 677c9e2f5cfeadbd23a41ce1
  *         name:
  *           type: string
  *           example: John Doe
@@ -48,18 +47,16 @@ const router = express.Router();
  *
  *     UpdateUserInput:
  *       type: object
- *       required:
- *         - _id
  *       properties:
- *         _id:
- *           type: string
- *           example: 677c9e2f5cfeadbd23a41ce1
  *         name:
  *           type: string
+ *           example: John Updated
  *         email:
  *           type: string
+ *           example: updated@gmail.com
  *         password:
  *           type: string
+ *           example: abc123
  *
  *     ErrorResponse:
  *       type: object
@@ -69,27 +66,14 @@ const router = express.Router();
  *         code:
  *           type: string
  *         status:
- *           type: number
- *       examples:
- *         UserExists:
- *           summary: User already exists
- *           value:
- *             message: User already exists
- *             code: USER_EXISTS
- *             status: 400
- *         UserNotFound:
- *           summary: User not found
- *           value:
- *             message: User does not exist
- *             code: USER_NOT_FOUND
- *             status: 400
+ *           type: integer
  */
 
 /**
  * @swagger
  * /api/users:
  *   post:
- *     summary: Create new user
+ *     summary: Create a new user
  *     tags: [Users]
  *     requestBody:
  *       required: true
@@ -104,9 +88,8 @@ const router = express.Router();
  *         description: User already exists
  *         content:
  *           application/json:
- *             examples:
- *               UserExists:
- *                 $ref: '#/components/schemas/ErrorResponse/examples/UserExists'
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  *       500:
  *         description: Server error
  */
@@ -121,12 +104,6 @@ router.post("/", createUser);
  *     responses:
  *       200:
  *         description: Users retrieved successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/User'
  *       500:
  *         description: Server error
  */
@@ -134,10 +111,17 @@ router.get("/", getAllUser);
 
 /**
  * @swagger
- * /api/users:
+ * /api/users/{id}:
  *   put:
- *     summary: Update user
+ *     summary: Update user by ID
  *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User ID
  *     requestBody:
  *       required: true
  *       content:
@@ -147,41 +131,39 @@ router.get("/", getAllUser);
  *     responses:
  *       200:
  *         description: User updated successfully
- *       400:
+ *       404:
  *         description: User not found
  *         content:
  *           application/json:
- *             examples:
- *               UserNotFound:
- *                 $ref: '#/components/schemas/ErrorResponse/examples/UserNotFound'
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  *       500:
  *         description: Server error
  */
-router.put("/", updateUser);
+router.put("/:id", updateUser);
 
 /**
  * @swagger
  * /api/users/{id}:
  *   delete:
- *     summary: Delete user
+ *     summary: Delete user by ID
  *     tags: [Users]
  *     parameters:
- *       - name: id
- *         in: path
+ *       - in: path
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         example: 677c9e2f5cfeadbd23a41ce1
+ *         description: The user ID
  *     responses:
  *       200:
  *         description: User deleted successfully
- *       400:
+ *       404:
  *         description: User not found
  *         content:
  *           application/json:
- *             examples:
- *               UserNotFound:
- *                 $ref: '#/components/schemas/ErrorResponse/examples/UserNotFound'
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  *       500:
  *         description: Server error
  */
